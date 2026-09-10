@@ -13,12 +13,12 @@ export default function RecipeDetail({ recipe, onBack }) {
             <h3>Ingredients</h3>
             <ul>
                 {Object.keys(recipe) //looks at the keys in the recipe obj.
-                .filter((key) => key.startsWith("strIngredient")) //keeps only that key
+                .filter((key) => key.startsWith("strIngredient") && recipe[key]) //keeps only the keys that start with "strIngredient" AND that strIngredient has a truthy value.
                 .map((key) => { //for every item, create something new
-                    const i = key.replace("strIngredient", ""); //only keep the number from the key
+                    const i = key.replace("strIngredient", ""); //only keep the number from the key, now the number that was stored in the const i can be used to match the ingredient and measure numbers. 
                     return (
                         <li key={key}>
-                            {recipe[key]} - {recipe[`strMeasure${i}`]} //now the number that was stored in the const i can be used to match the ingredient and measure numbers.
+                            {recipe[key]} - {recipe[`strMeasure${i}`]} 
                         </li>
                     );
                 })}
